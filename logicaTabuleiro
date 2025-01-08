@@ -1,0 +1,78 @@
+function posicionarNavio(tabuleiro, linhaInicial, colunaInicial, tamanho, orientacao) {
+    const coordenadas = [];
+    let valido = true;
+
+    if (orientacao === 'horizontal' && colunaInicial + tamanho <= 10) {
+        for (let i = 0; i < tamanho; i++) {
+            if (tabuleiro[linhaInicial][colunaInicial + i] !== 0) {
+                valido = false;
+                break;
+            }
+            coordenadas.push([linhaInicial, colunaInicial + i]);
+        }
+    } else if (orientacao === 'vertical' && linhaInicial + tamanho <= 10) {
+        for (let i = 0; i < tamanho; i++) {
+            if (tabuleiro[linhaInicial + i][colunaInicial] !== 0) {
+                valido = false;
+                break;
+            }
+            coordenadas.push([linhaInicial + i, colunaInicial]);
+        }
+    } else {
+        valido = false;
+    }
+
+    if (valido) {
+        for (const [x, y] of coordenadas) {
+            tabuleiro[x][y] = 1; 
+        }
+        return { sucesso: true, coordenadas };
+    } else {
+        return { sucesso: false, mensagem: "Posição inválida ou navio não cabe." };
+    }
+}
+
+function registrarAtaque(tabuleiro, linha, coluna) {
+    if (tabuleiro[linha][coluna] === 0) {
+        tabuleiro[linha][coluna] = -1;
+        return "Água";
+    } else if (tabuleiro[linha][coluna] === 1) {
+        tabuleiro[linha][coluna] = 2;
+        return "Acertou um navio!";
+    } else {
+        return "Já atacado";
+    }
+}
+
+const tabuleiro = criarTabuleiro();
+const navios = [ { nome: "Porta-Aviões", tamanho: 5}, 
+    {nome : "Couraçado", tamanho: 4}, 
+    { nome: "Cruzador", tamanho: 3}, 
+    {nome : "Submarino", tamanho: 3}, 
+    {nome: "Destroyer", tamanho: 2}
+];
+
+for (const navio of navios) {
+    navio.coordenadas.posicionarNavio(tabuleiro, linhaInicial, colunaIncial, navio.tamanho, orientacao);
+}
+
+function verificarFimDeJogo(tabuleiro) {
+    for (const linha of tabuleiro) {
+        if (linha.includes(1)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function registrarAtaque(tabuleiro, linha, coluna) {
+    if (tabuleiro[linha][coluna] === 0) {
+        tabuleiro[linha][coluna] = -1;
+        return "Água";
+    } else if (tabuleiro[linha][coluna] === 1) {
+        tabuleiro[linha][coluna] = 2;
+        return "Acertou um navio!";
+    } else {
+        return "Já atacado";
+    }
+}
