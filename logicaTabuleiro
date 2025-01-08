@@ -76,3 +76,9 @@ function registrarAtaque(tabuleiro, linha, coluna) {
         return "Já atacado";
     }
 }
+
+/* 
+Quando a "casa" tem valor 0, ela está vazia, não tem nada;
+Quando a "casa" é atingida e tem valor 0, o jogador acertou a "água", e agora a casa será representada com o valor -1;
+Quando a "casa" tem valor 1, algum dos barcos ocupa essa casa; 
+Quando a "casa" é atingida e tem valor 1, o jogador acertou um barco, e agora a casa será representada com o valor 2;
