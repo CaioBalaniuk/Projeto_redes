@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import { useNavigate} from "react-router-dom";
 
-const Button1 = ({link}) => {
+
+const Button3 = ({link}) => {
     const [isHovered, setIsHovered] = useState(false);
     const navigate = useNavigate();
 
@@ -9,26 +10,24 @@ const Button1 = ({link}) => {
     const handleMouseLeave = () => setIsHovered(false);
 
     const handleClick = () =>{
-      navigate(link);
+      window.location.href = link;  // Mudar a URL para o link externo
   };
     const buttonStyle = {
-        width: "356px",
-        height: "142px",
-        backgroundColor: isHovered ? "#781C1C" : "#9A2525",
-        border: "1px solid #000000",
-        borderRadius: "68px",
-        color: isHovered ? "#000000" : "#FFFFFF",
-        fontFamily: "'Goldman', sans-serif",
-        fontSize: "64px",
-        lineHeight: "77px",
+        width: "50.43px",
+        height: "101.29px",
+        color: isHovered ? "#000000":"#741D1D",
+        fontFamily: 'Goldman',
+        fontStyle: isHovered ? "normal" : "bold",
+        fontWeight: "400",
+        fontSize: "24px",
+        lineHeight: "29px",
+
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         cursor: "pointer",
-        transition: "background-color 0.3s ease, color 0.3s ease",
+        transition: "color 0.3s ease, color 0.3s ease",
         position: "absolute",
-        top: "450px",
-        left: "730px"
   };
 
   return (
@@ -38,9 +37,20 @@ const Button1 = ({link}) => {
         onClick = {handleClick}
         style = {buttonStyle}
     >
-        {"START"}
+        {"sair..."}
     </button>
   );
 };
 
-export default Button1;
+export default Button3;
+
+
+
+
+
+
+
+
+
+
+
