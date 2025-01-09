@@ -1,3 +1,4 @@
+
 import React from "react";
 import Button1 from "../components/button1";
 import Ttitulo from "../components/titulo";
@@ -27,4 +28,5 @@ const StartPage = () => {
 }
 
 export default StartPage;
+
 

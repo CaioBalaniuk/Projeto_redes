@@ -29,4 +29,3 @@ const NamePage = () => {
 }
 
 export default NamePage;
-//            <Button3/>

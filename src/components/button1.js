@@ -9,7 +9,7 @@ const Button1 = ({link}) => {
     const handleMouseLeave = () => setIsHovered(false);
 
     const handleClick = () =>{
-      navigate(link);
+      navigate(link)
   };
     const buttonStyle = {
         width: "356px",
