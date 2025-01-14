@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Batalha Naval</title>
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+    <style>
+        .tabuleiro {
+            display: grid;
+            grid-template-columns: repeat(10, 30px);
+            grid-gap: 5px;
+        }
+        .celula {
+            width: 30px;
+            height: 30px;
+            border: 1px solid black;
+            text-align: center;
+            line-height: 30px;
+        }
+        .navio {
+            background-color: #00f;
+        }
+        .agua {
+            background-color: #ddd;
+        }
+        .acertou {
+            background-color: #f00;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jogo de Batalha Naval</h1>
+
+    <div id="jogador"></div>
+    <div class="tabuleiro" id="tabuleiro"></div>
+
+    <h2>Comandos</h2>
+    <div>
+        <h3>Posicionar Navio</h3>
+        Linha: <input id="linha" type="number" min="0" max="9">
+        Coluna: <input id="coluna" type="number" min="0" max="9">
+        Tamanho: <input id="tamanho" type="number" min="1" max="5">
+        Orientação:
+        <select id="orientacao">
+            <option value="horizontal">Horizontal</option>
+            <option value="vertical">Vertical</option>
+        </select>
+        <button id="posicionar">Posicionar</button>
+    </div>
+
+    <div>
+        <h3>Atacar</h3>
+        Linha: <input id="linhaAtaque" type="number" min="0" max="9">
+        Coluna: <input id="colunaAtaque" type="number" min="0" max="9">
+        <button id="atacar">Atacar</button>
+    </div>
+
+    <script>
+        const socket = io('http://localhost:3000'); // Conecta ao servidor
+
+        // Referências aos elementos do DOM
+        const tabuleiroElement = document.getElementById('tabuleiro');
+        const jogadorElement = document.getElementById('jogador');
+
+        // Inicializa o tabuleiro
+        function desenharTabuleiro(tabuleiro) {
+            tabuleiroElement.innerHTML = ''; // Limpa o tabuleiro
+            for (let i = 0; i < tabuleiro.length; i++) {
+                for (let j = 0; j < tabuleiro[i].length; j++) {
+                    const celula = document.createElement('div');
+                    celula.classList.add('celula');
+                    celula.dataset.linha = i;
+                    celula.dataset.coluna = j;
+
+                    // Define o estilo com base no estado da célula
+                    if (tabuleiro[i][j] === 1) celula.classList.add('navio');
+                    if (tabuleiro[i][j] === -1) celula.classList.add('agua');
+                    if (tabuleiro[i][j] === 2) celula.classList.add('acertou');
+
+                    tabuleiroElement.appendChild(celula);
+                }
+            }
+        }
+
+        // Listener para iniciar o jogo
+        socket.on('iniciar', (data) => {
+            const { tabuleiro } = data;
+            jogadorElement.textContent = `Você é o Jogador ${data.jogador}`;
+            desenharTabuleiro(tabuleiro);
+        });
+
+        // Listener para posicionar um navio
+        document.getElementById('posicionar').addEventListener('click', () => {
+            const linha = parseInt(document.getElementById('linha').value);
+            const coluna = parseInt(document.getElementById('coluna').value);
+            const tamanho = parseInt(document.getElementById('tamanho').value);
+            const orientacao = document.getElementById('orientacao').value;
+
+            socket.emit('posicionar', { tabuleiro, linha, coluna, tamanho, orientacao });
+        });
+
+        // Listener para ataques
+        document.getElementById('atacar').addEventListener('click', () => {
+            const linha = parseInt(document.getElementById('linhaAtaque').value);
+            const coluna = parseInt(document.getElementById('colunaAtaque').value);
+
+            socket.emit('atacar', { linha, coluna });
+        });
+
+        // Atualiza o tabuleiro após um ataque
+        socket.on('ataque', (data) => {
+            const { resultado, tabuleiro } = data;
+            alert(resultado); // Exibe o resultado do ataque
+            desenharTabuleiro(tabuleiro); // Atualiza o tabuleiro
+        });
+
+        // Exibe mensagem de erro ao posicionar um navio
+        socket.on('erro', (mensagem) => {
+            alert(mensagem);
+        });
+
+        // Exibe mensagem de fim de jogo
+        socket.on('fimDeJogo', (data) => {
+            alert(`Fim de jogo! O vencedor foi o Jogador ${data.vencedor}`);
+        });
+
+        socket.emit('test', 'Olá servidor!');
+
+    socket.on('testResponse', (msg) => {
+        console.log('Resposta do servidor:', msg);
+});
+
+    </script>
+</body>
+</html>
