@@ -5,8 +5,8 @@ const Ttitulo = () => {
     const titleStyle = {
         position: "absolute",
         width: "870px",
-        left: "500px",
-        top: "30px",
+        left:"23%",
+        top: "-2%",
         
         fontFamily: 'Goldman',
         fontStyle: "normal",

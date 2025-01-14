@@ -10,14 +10,15 @@ const Button3 = ({link}) => {
     const handleMouseLeave = () => setIsHovered(false);
 
     const handleClick = () =>{
-      window.location.href = link;  // Mudar a URL para o link externo
+      navigate(link)
   };
+
     const buttonStyle = {
-        width: "50.43px",
-        height: "101.29px",
-        color: isHovered ? "#000000":"#741D1D",
+        //width: "50.43px",
+        //height: "101.29px",
+        color: isHovered ? "#AB1818": "#000000",
         fontFamily: 'Goldman',
-        fontStyle: isHovered ? "normal" : "bold",
+        fontStyle: isHovered ? "bold": "normal",
         fontWeight: "400",
         fontSize: "24px",
         lineHeight: "29px",
@@ -28,17 +29,19 @@ const Button3 = ({link}) => {
         cursor: "pointer",
         transition: "color 0.3s ease, color 0.3s ease",
         position: "absolute",
+        top: "330px",
+        left: "50px"
   };
 
   return (
-    <button
+    <div
         onMouseEnter = {handleMouseEnter}
         onMouseLeave = {handleMouseLeave}
         onClick = {handleClick}
         style = {buttonStyle}
     >
         {"sair..."}
-    </button>
+    </div>
   );
 };
 

@@ -14,7 +14,7 @@ const Button1 = ({link}) => {
     const buttonStyle = {
         width: "356px",
         height: "142px",
-        backgroundColor: isHovered ? "#781C1C" : "#9A2525",
+        backgroundColor: isHovered ?  "#781C1C" : "#9A2525",
         border: "1px solid #000000",
         borderRadius: "68px",
         color: isHovered ? "#000000" : "#FFFFFF",
@@ -27,8 +27,8 @@ const Button1 = ({link}) => {
         cursor: "pointer",
         transition: "background-color 0.3s ease, color 0.3s ease",
         position: "absolute",
-        top: "450px",
-        left: "730px"
+        top: "45%",
+        left: "37%"
   };
 
   return (

@@ -1,8 +1,8 @@
 import React from "react";
-import Button3 from "../components/button1";
+import Button3 from "../components/button3";
 import Button2 from "../components/button2";
 import Ttitulo from "../components/titulo";
-import image2 from "../assets/image2.png";
+import image3 from "../assets/imagem3.png";
 
 const NamePage = () => {
     const styles = {
@@ -12,17 +12,81 @@ const NamePage = () => {
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundImage: `url(${image2})`, //caminho para a imagem
-            backgroundSize: "100% 100%",
-            backgroundPosition: "center",
+            backgroundImage: `url(${image3})`, //caminho para a imagem
+            backgroundSize: "100%",
+            backgroundPosition: "cover",
             zIndex: -1,  //imagem no centro
+
         },
+
+        centralSquare: {
+            position: "absolute",
+            width: "423px",
+            height: "389px",
+            left: "35%",
+            top: "30%",
+
+            background: "#D9D9D9",
+            borderRadius: "25px",
+        },
+        inputBox: {
+            position: "absolute",
+            width: "300px",
+            height: "50px",
+            left: "57px",
+            top: "190px",
+
+            background: "#FFFFFF",
+        },
+
+        titleBox: {
+            position: "absolute",
+            width: "423px",
+            height: "95.62px",
+            left: "0px",
+            top: "0px",
+
+            background: "#9F9F9F",
+            borderRadius: "25px 25px 0px 0px",
+        },
+        titletext: {
+            position: "absolute",
+            textAlign: "center",
+            width: "315.96px",
+            height: "82.58px",
+            left: "55px",
+            top: "10px",
+
+            fontFamily: 'Goldman',
+            fontStyle: "normal",
+            fontWeight: 400,
+            fontSize: "32px",
+            lineHeight: "38px",
+
+            color: "#000000",
+        }
+
     }
+
     return (
         <div style={styles.backgroundImage}>
-            <h1><Ttitulo/></h1>
+            <Ttitulo/>
+            <div style={styles.centralSquare}>
+                <div style={styles.titleBox}>
+                    <div style={styles.titletext}>
+                        Escolha seu nome de Guerra
+                    </div>
+                </div>
+                <input
+                    type="text"
+                    style={styles.inputBox}
+                    placeholder="Digite seu nome aqui..."
+                />
 
-            <Button2/>
+                <Button2 link = "/StartGridPage"/>
+                <Button3 link = "/StartPage"/>
+
+            </div>
 
         </div>
     )
