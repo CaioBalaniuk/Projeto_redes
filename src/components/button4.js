@@ -1,7 +1,9 @@
 import React, {useState} from "react";
 import { useNavigate} from "react-router-dom";
 
-const Button4 = ({link,top, left }) => {
+//BOTAO AZUL USADO NO TABULEIRO
+
+const Button4 = ({link,top, left, useClick = true}) => {
     const [isHovered, setIsHovered] = useState(false);
     const [isClicked, setIsClicked] = useState(false);
     const navigate = useNavigate();
@@ -10,8 +12,12 @@ const Button4 = ({link,top, left }) => {
     const handleMouseLeave = () => setIsHovered(false);
 
     const handleClick = () =>{
-      setIsClicked((prevState) => !prevState);
-      navigate(link);
+      if (useClick) {
+        setIsClicked((prevState) => !prevState);
+        navigate(link);
+      } else {
+        navigate(link);
+      }
     }
 
     const buttonStyle = {

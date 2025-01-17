@@ -11,7 +11,7 @@ const StartGridPage = () => {
             position: "absolute",
             top: "0px",
             left: 0,
-            width: "105%",
+            width: "110%",
             height: "150%",
             backgroundImage: `url(${image3})`, //caminho para a imagem
             backgroundSize: "100% 100%",
@@ -71,6 +71,22 @@ const StartGridPage = () => {
             opacity: 1,
             color: "#AB1818",
         
+        },
+
+        subitle: {
+            position: "absolute",
+            width: "1300px",
+            height: "72px",
+            left: "7%",
+            top: "20%",
+
+            fontFamily: 'Goldman',
+            fontStyle: "normal",
+            fontWeight: 400,
+            fontSize: "60px",
+            lineHeight: "72px",
+            color: "#AB1818",
+            zIndex: 1,
         },
 
     }

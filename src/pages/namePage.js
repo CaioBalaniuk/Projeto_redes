@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Button3 from "../components/button3";
 import Button2 from "../components/button2";
 import Ttitulo from "../components/titulo";
 import image3 from "../assets/imagem3.png";
+import {io} from "socket.io-client";
 
-const NamePage = () => {
+const NamePage = ({socket}) => {
+    const [nomeJogador, setNomeJogador] = useState("");
+
+
+    const handleInputChange = (e) => {
+        setNomeJogador(e.target.value);
+    };
+
+
+
     const styles = {
         backgroundImage: {
             position: "absolute",
@@ -77,13 +87,18 @@ const NamePage = () => {
                         Escolha seu nome de Guerra
                     </div>
                 </div>
-                <input
-                    type="text"
-                    style={styles.inputBox}
-                    placeholder="Digite seu nome aqui..."
-                />
+                <form>
+                    <input
+                        type="text"
+                        style={styles.inputBox}
+                        placeholder="Digite seu nome aqui..."
+                        value={nomeJogador}
+                        onChange={handleInputChange}
+                    />
+                </form>
+                
 
-                <Button2 link = "/StartGridPage"/>
+                <Button2 link={ "/StartGridPage"} socket={io("http://localhost:3000")} nome = {nomeJogador}/>
                 <Button3 link = "/StartPage"/>
 
             </div>

@@ -17,7 +17,7 @@ const Button5 = ({link}) => {
         width: "131px",
         height: "45px",
         left: "68%",
-        top: "75%",
+        top: "85%",
 
         boxSizing: "border-box",
 

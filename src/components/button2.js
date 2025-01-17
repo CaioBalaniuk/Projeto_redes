@@ -1,14 +1,35 @@
 import React, {useState} from "react";
 import { useNavigate} from "react-router-dom";
+import {io} from "socket.io-client";
 
-const Button2 = ({link}) => {
+//BOTAO BATALHAA
+
+const Button2 = ({link, socket, nome}) => {
     const [isHovered, setIsHovered] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(false);
     const navigate = useNavigate();
-
+    
     const handleMouseEnter = () => setIsHovered(true);
     const handleMouseLeave = () => setIsHovered(false);
 
-    const handleClick = () => navigate(link);
+
+    const handleClick = () => {
+        const socket = io("http://localhost:3000");
+        
+        if (socket) {
+            setIsDisabled(true);
+            socket.emit("connection");
+            socket.emit("definirNome", nome);
+            socket.emit("iniciarJogo");
+            console.log("Evento 'connection' emitido.")
+
+            socket.once("iniciar", () =>{
+                console.log("Jogo iniciado no backend");
+                navigate(link);
+            })
+
+        }
+    }
 
     const buttonStyle = {
         position: "absolute",
@@ -36,8 +57,9 @@ const Button2 = ({link}) => {
             onMouseLeave = {handleMouseLeave}
             onClick = {handleClick}
             style = {buttonStyle}
+            disabled = {isDisabled}
         >
-            {"BATALHA!!!"}
+            {isDisabled ?"Aguardando...": "BATALHA!!!"}
         </button>
     );
 };
