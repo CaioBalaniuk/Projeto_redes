@@ -4,7 +4,8 @@ import StartPage from "./pages/startPage";  // Certifique-se de que o caminho es
 import NamePage from "./pages/namePage";
 import StartGridPage from "./pages/startGridpage";
 import PGP from "./pages/playingGridPage";
-import {io} from "socket.io-client";
+import EndPage from "./pages/endPage";
+
 
 function App() {
     
@@ -15,6 +16,7 @@ function App() {
           <Route path = "/StartPage" element = {<StartPage />}/>
           <Route path = "/StartGridPage" element = {<StartGridPage />}/>
           <Route path = "/PlayingGridPage" element = {<PGP/>}/>
+          <Route path = "/EndPage" elemento = {<EndPage/>}/>
         </Routes>
     );
 }

@@ -3,14 +3,28 @@ import { useNavigate} from "react-router-dom";
 
 //BOTAO VERIFICAR
 
-const Button5 = ({link}) => {
+const Button5 = ({link,onClick, envia, coor, nome}) => {
     const [isHovered, setIsHovered] = useState(false);
     const navigate = useNavigate();
-
+    const [contador, setContador] = useState(0);
+    const [isReady, setIsReady] = useState(false);
     const handleMouseEnter = () => setIsHovered(true);
     const handleMouseLeave = () => setIsHovered(false);
 
-    const handleClick = () => {navigate(link)};
+    const handleClick = () => {
+        const dados = [];
+        onClick(dados);
+        envia();
+        //alert(coor);
+        if (contador === 4) {
+            setIsReady(true);
+        }
+        if (contador === 5){
+            navigate(link, {state: {coor, nome}});
+
+        };
+        setContador(contador +1);
+    }
 
     const buttonStyle = {
         position: "absolute",
@@ -44,7 +58,7 @@ const Button5 = ({link}) => {
             onClick = {handleClick}
             style = {buttonStyle}
         >
-            {"Verificar"}
+            {isReady? "Ir": "Verificar"}
         </button>
     );
 };
