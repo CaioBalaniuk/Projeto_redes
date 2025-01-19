@@ -4,6 +4,8 @@ import image3 from "../assets/imagem3.png";
 import TextAux from "../components/textAUx";
 import Button4 from "../components/button4";
 import Button6 from "../components/button6";
+import Button7 from "../components/button7";
+import Button8 from "../components/button8";
 
 const PGP = () => {
   const styles = {
@@ -333,6 +335,8 @@ const PGP = () => {
         <Button6 top="90%" left="70%" />
         <Button6 top="90%" left="80%" />
         <Button6 top="90%" left="90%" />
+        <Button7 link="/playingGridPage" />
+        <Button8 />
       </div>
     </div>
   );
